@@ -1,0 +1,94 @@
+use FPTAttendanceSystem
+create table Student (
+	sID int primary key,
+	sName nvarchar(100) not null,
+	sPhoneNumber varchar(16) not null,
+	sAddress varchar(300),
+	sDOB date not null,
+	sGender varchar(10) not null,
+	sEmail varchar(50) not null
+)
+
+create table Parent (
+	pID int primary key,
+	pName nvarchar(100) not null
+)
+
+create table StudentParent (
+	studentId int foreign key references Student(sID) not null,
+	parentId int foreign key references Parent(pID) not null
+)
+
+create table Teacher (
+	tID int primary key,
+	tName nvarchar(100) not null,
+	tDOB date not null,
+	tGender varchar(10) not null,
+	tEmail varchar(50) not null
+)
+
+create table TeacherClass (
+	teacherID int foreign key references Teacher(tID) not null,
+	classID int foreign key references Class(cID) not null
+)
+
+create table Class (
+	cID int primary key,
+	sName varchar(50) not null,
+	sSubject varchar(50) not null,
+	sDescription varchar(200)
+)
+
+create table StudentClass (
+	studentID int foreign key references Student(sID),
+	classID int foreign key references Class(cID)
+)
+
+create table Lesson (
+	lessonID int primary key,
+	lessonDate date not null,
+	teacherID int foreign key references Teacher(tID),
+	classID int foreign key references Class(cID)
+)
+
+create table StudentAttendance (
+	studentID int foreign key references Student(sID),
+	lessonID int foreign key references Lesson(lessonID),
+	saPresent bit,
+	saReasonOfAbsent varchar(300)
+)
+
+insert into Student (sID, sName, sPhoneNumber, sAddress, sDOB, sGender, sEmail) values
+('00001','Nguyen Minh Anh', '0862351477', 'Ha Noi', '2003-09-19', 'Male', 'anh@gmail.com'),
+('00002','Nguyen Cong Dung', '0843244763', 'Ha Noi', '2002-03-23', 'Male', 'dung@gmail.com'),
+('00003','Cao Vi Hoa', '0642759314', 'Ha Noi', '2003-12-12', 'Female', 'hoa@gmail.com')
+
+select * from Student
+
+insert into Teacher (tID, tName, tDOB, tGender, tEmail) values
+('00001','Nguyen Thai Cuong', '1987-04-04', 'Male', 'cuong@gmail.com'),
+('00002','Ngo The Nam', '1989-02-13', 'Male', 'nam@gmail.com'),
+('00003','Ngo Thi Mai Loan', '1990-11-11', 'Female', 'loan@gmail.com')
+
+select * from Teacher
+
+insert into Class (cID, cName, cSubject, cDescription) values
+('17105','PBIT17105','Database Design & Development',''),
+('17106','PBIT17106','Professional Practise',''),
+('17107','PBIT17107','Software Development Life Cycle','')
+
+select * from Class
+
+insert into Lesson (lessonDate, teacherID, classID) values
+('2022-06-11','1','17105'),
+('2022-06-4','2','17106'),
+('2022-05-9','3','17107')
+
+select * from Lesson
+
+insert into StudentAttendance (studentID, lessonID, saPresent, saReasonOfAbsent) values
+('1','1014','true',''),
+('2','1015','true',''),
+('3','1016','false','Have classes from other school')
+
+select * from StudentAttendance
