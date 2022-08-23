@@ -159,6 +159,7 @@
             this.Controls.Add(this.txtEntryCount);
             this.Controls.Add(this.labelUsername);
             this.Name = "LessonTeacher";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lesson Management";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LessonTeacher_FormClosing);
             this.Load += new System.EventHandler(this.LessonTeacher_Load);

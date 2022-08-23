@@ -44,7 +44,9 @@ namespace FPT_Attendance_System
             }
             dr.Close();
             cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT Lesson.lessonID, Lesson.lessonDate, Teacher.tName , Class.cName FROM Lesson, Class, Teacher WHERE Class.cID = Lesson.classID AND Teacher.tId = Lesson.teacherID";
+            cmd.CommandText = "SELECT Lesson.lessonID, Lesson.lessonDate, " +
+                "Teacher.tName , Class.cName FROM Lesson, Class, Teacher " +
+                "WHERE Class.cID = Lesson.classID AND Teacher.tId = Lesson.teacherID";
             dr = cmd.ExecuteReader();
             listLesson.Items.Clear();
             while (dr.Read())

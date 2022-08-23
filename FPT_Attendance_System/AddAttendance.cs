@@ -44,25 +44,30 @@ namespace FPT_Attendance_System
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            con.Open();
-            try
+            if (comboStudentID.Text != "")
             {
-                cmd = con.CreateCommand();
-                cmd.CommandText = "INSERT INTO StudentAttendance(lessonID, studentID, saPresent, saReasonOfAbsent) VALUES(@lessonID,@studentID,@present,@reasonOfAbsent)";
+                con.Open();
+                try
+                {
+                    cmd = con.CreateCommand();
+                    cmd.CommandText = "INSERT INTO StudentAttendance(lessonID, studentID, saPresent, " +
+                        "saReasonOfAbsent) VALUES(@lessonID,@studentID,@present,@reasonOfAbsent)";
 
-                cmd.Parameters.Add("@lessonID", SqlDbType.Int).Value = Int32.Parse(lessonID);
-                cmd.Parameters.Add("@studentID", SqlDbType.Int).Value = Int32.Parse(comboStudentID.Text);
-                cmd.Parameters.Add("@present", SqlDbType.Bit).Value = radioPresent.Checked;
-                cmd.Parameters.Add("@reasonOfAbsent", SqlDbType.VarChar).Value = rtxtReason.Text;
+                    cmd.Parameters.Add("@lessonID", SqlDbType.Int).Value = Int32.Parse(lessonID);
+                    cmd.Parameters.Add("@studentID", SqlDbType.Int).Value = Int32.Parse(comboStudentID.Text);
+                    cmd.Parameters.Add("@present", SqlDbType.Bit).Value = radioPresent.Checked;
+                    cmd.Parameters.Add("@reasonOfAbsent", SqlDbType.VarChar).Value = rtxtReason.Text;
 
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Attendance has been successfully added!", "Added");
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Attendance has been successfully added!", "Added");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Insert Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                con.Close();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Insert Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            con.Close();
+            else MessageBox.Show("Please input all of the required values!", "Insert Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void AddAttendance_FormClosing(object sender, FormClosingEventArgs e)

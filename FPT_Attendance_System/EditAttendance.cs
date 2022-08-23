@@ -48,13 +48,14 @@ namespace FPT_Attendance_System
             try
             {
                 cmd = con.CreateCommand();
-                cmd.CommandText = "UPDATE StudentAttendance SET saPresent = @present, saReasonOfAbsent = @reasonOfAbsent WHERE lessonID = " + lessonID + " AND studentID = " + studentID;
+                cmd.CommandText = "UPDATE StudentAttendance SET saPresent = @present, saReasonOfAbsent = " +
+                    "@reasonOfAbsent WHERE lessonID = " + lessonID + " AND studentID = " + studentID;
 
                 cmd.Parameters.Add("@present", SqlDbType.Bit).Value = radioPresent.Checked;
                 cmd.Parameters.Add("@reasonOfAbsent", SqlDbType.VarChar).Value = rtxtReason.Text;
 
                 cmd.ExecuteNonQuery();
-                MessageBox.Show("Lesson has been successfully edited!", "Added");
+                MessageBox.Show("Attendance has been successfully edited!", "Added");
             }
             catch (Exception ex)
             {

@@ -88,7 +88,10 @@
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.labelPassword);
             this.Controls.Add(this.labelUsername);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);

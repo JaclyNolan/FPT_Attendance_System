@@ -186,6 +186,7 @@
             this.Controls.Add(this.listLesson);
             this.Controls.Add(this.btnHome);
             this.Name = "LessonAdmin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lesson Management";
             this.Activated += new System.EventHandler(this.LessonAdmin_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LessonAdmin_FormClosing);

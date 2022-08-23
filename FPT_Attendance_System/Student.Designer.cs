@@ -71,6 +71,7 @@
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.labelUsername);
             this.Name = "Student";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Student";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Student_FormClosing);
             this.Load += new System.EventHandler(this.Student_Load);

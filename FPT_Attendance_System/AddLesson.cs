@@ -60,50 +60,59 @@ namespace FPT_Attendance_System
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            con.Open();
-            try
+            if (dtpLessonDate.Value != null && comboClassID.Text != "" && comboTeacherID.Text != "")
             {
-                cmd = con.CreateCommand();
-                cmd.CommandText = "INSERT INTO Lesson(lessonDate, teacherID, classID) OUTPUT Inserted.lessonID VALUES(@lessonDate,@teacherID,@classID)";
-                
-                cmd.Parameters.Add("@lessonDate", SqlDbType.Date).Value = dtpLessonDate.Value;
-                cmd.Parameters.Add("@teacherID", SqlDbType.Int).Value = comboTeacherID.Text;
-                cmd.Parameters.Add("@classID", SqlDbType.Int).Value = comboClassID.Text;
+                con.Open();
+                try
+                {
+                    cmd = con.CreateCommand();
+                    cmd.CommandText = "INSERT INTO Lesson(lessonDate, teacherID, classID)" +
+                        " OUTPUT Inserted.lessonID VALUES(@lessonDate,@teacherID,@classID)";
 
-                dr = cmd.ExecuteReader();
-                string lessonID = "";
-                if (dr.Read()) lessonID = dr.GetInt32(0).ToString();
-                dr.Close();
-                cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT COUNT(studentID) FROM StudentClass WHERE classID = " + comboClassID.Text;
-                dr = cmd.ExecuteReader();
-                int nOfStudentID = 0;
-                if (dr.Read()) nOfStudentID = dr.GetInt32(0);
-                dr.Close();
-                int[] studentID = new int[nOfStudentID];
-                cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT studentID FROM StudentClass WHERE classID = " + comboClassID.Text;
-                dr = cmd.ExecuteReader();
-                SqlCommand cmd2;
-                for (int i = 0; i < nOfStudentID; i++)
-                {
-                    dr.Read();
-                    studentID[i] = dr.GetInt32(0);
+                    cmd.Parameters.Add("@lessonDate", SqlDbType.Date).Value = dtpLessonDate.Value;
+                    cmd.Parameters.Add("@teacherID", SqlDbType.Int).Value = comboTeacherID.Text;
+                    cmd.Parameters.Add("@classID", SqlDbType.Int).Value = comboClassID.Text;
+
+                    dr = cmd.ExecuteReader();
+                    string lessonID = "";
+                    if (dr.Read()) lessonID = dr.GetInt32(0).ToString();
+                    dr.Close();
+                    cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT COUNT(studentID) FROM StudentClass WHERE" +
+                        " classID = " + comboClassID.Text;
+                    dr = cmd.ExecuteReader();
+                    int nOfStudentID = 0;
+                    if (dr.Read()) nOfStudentID = dr.GetInt32(0);
+                    dr.Close();
+                    int[] studentID = new int[nOfStudentID];
+                    cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT studentID FROM StudentClass WHERE classID" +
+                        " = " + comboClassID.Text;
+                    dr = cmd.ExecuteReader();
+                    SqlCommand cmd2;
+                    for (int i = 0; i < nOfStudentID; i++)
+                    {
+                        dr.Read();
+                        studentID[i] = dr.GetInt32(0);
+                    }
+                    dr.Close();
+                    foreach (int id in studentID)
+                    {
+                        cmd2 = con.CreateCommand();
+                        cmd2.CommandText = "INSERT INTO StudentAttendance(studentID, " +
+                            "lessonID, saPresent, saReasonOfAbsent) VALUES (" + id + ","
+                            + lessonID + ",0,'')";
+                        cmd2.ExecuteNonQuery();
+                    }
+                    MessageBox.Show("Lesson has been successfully added!", "Added");
                 }
-                dr.Close(); 
-                foreach (int id in studentID)
+                catch (Exception ex)
                 {
-                    cmd2 = con.CreateCommand();
-                    cmd2.CommandText = "INSERT INTO StudentAttendance(studentID, lessonID, saPresent, saReasonOfAbsent) VALUES (" + id + "," + lessonID + ",0,'')";
-                    cmd2.ExecuteNonQuery();
+                    MessageBox.Show(ex.Message, "Insert Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                MessageBox.Show("Lesson has been successfully added!", "Added");
+                con.Close();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Insert Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            con.Close();
+           else MessageBox.Show("Please input all of the required values!", "Insert Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

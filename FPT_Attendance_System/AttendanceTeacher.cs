@@ -53,8 +53,8 @@ namespace FPT_Attendance_System
             dr = cmd.ExecuteReader();
             if (dr.Read())
             {
-                labelClass.Text = dr.GetString(1);
-                labelDate.Text = dr.GetDateTime(0).ToShortDateString();
+                labelClass.Text = "Class: " +  dr.GetString(1);
+                labelDate.Text = "Date: " + dr.GetDateTime(0).ToShortDateString();
             }
             dr.Close();
             con.Close();
@@ -113,7 +113,7 @@ namespace FPT_Attendance_System
                 {
                     string studentID = item.Text;
                     cmd = con.CreateCommand();
-                    cmd.CommandText = "UPDATE StudentAttendance SET saPresent = 1 WHERE studentID = " + studentID;
+                    cmd.CommandText = "UPDATE StudentAttendance SET saPresent = 1 WHERE lessonID = " + lessonID + " AND studentID = " + studentID;
                     cmd.ExecuteNonQuery();
                 }
                 con.Close();
@@ -136,7 +136,7 @@ namespace FPT_Attendance_System
                 {
                     string studentID = item.Text;
                     cmd = con.CreateCommand();
-                    cmd.CommandText = "UPDATE StudentAttendance SET saPresent = 0 WHERE studentID = " + studentID;
+                    cmd.CommandText = "UPDATE StudentAttendance SET saPresent = 0 WHERE lessonID =  " + lessonID + " AND studentID = " + studentID;
                     cmd.ExecuteNonQuery();
                 }
                 con.Close();

@@ -144,6 +144,7 @@
             this.Controls.Add(this.labelUsername);
             this.Controls.Add(this.btnBack);
             this.Name = "EditLesson";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Lesson";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditLesson_FormClosing);
             this.Load += new System.EventHandler(this.EditLesson_Load);

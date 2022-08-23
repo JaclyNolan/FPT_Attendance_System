@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem53 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "what",
             "noshit",
             "hmmmmmmmm",
             "ok I get"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem54 = new System.Windows.Forms.ListViewItem("shit");
-            System.Windows.Forms.ListViewItem listViewItem55 = new System.Windows.Forms.ListViewItem("dog");
-            System.Windows.Forms.ListViewItem listViewItem56 = new System.Windows.Forms.ListViewItem("dog");
-            System.Windows.Forms.ListViewItem listViewItem57 = new System.Windows.Forms.ListViewItem("dog");
-            System.Windows.Forms.ListViewItem listViewItem58 = new System.Windows.Forms.ListViewItem("dog");
-            System.Windows.Forms.ListViewItem listViewItem59 = new System.Windows.Forms.ListViewItem("dog");
-            System.Windows.Forms.ListViewItem listViewItem60 = new System.Windows.Forms.ListViewItem("dog");
-            System.Windows.Forms.ListViewItem listViewItem61 = new System.Windows.Forms.ListViewItem("dog");
-            System.Windows.Forms.ListViewItem listViewItem62 = new System.Windows.Forms.ListViewItem("dog");
-            System.Windows.Forms.ListViewItem listViewItem63 = new System.Windows.Forms.ListViewItem("dog");
-            System.Windows.Forms.ListViewItem listViewItem64 = new System.Windows.Forms.ListViewItem("dog");
-            System.Windows.Forms.ListViewItem listViewItem65 = new System.Windows.Forms.ListViewItem("dog");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("shit");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("dog");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("dog");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("dog");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("dog");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("dog");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("dog");
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("dog");
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("dog");
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("dog");
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("dog");
+            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("dog");
             this.listLesson = new System.Windows.Forms.ListView();
             this.clnStudentID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clnStudentName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -68,19 +68,19 @@
             this.listLesson.FullRowSelect = true;
             this.listLesson.HideSelection = false;
             this.listLesson.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem53,
-            listViewItem54,
-            listViewItem55,
-            listViewItem56,
-            listViewItem57,
-            listViewItem58,
-            listViewItem59,
-            listViewItem60,
-            listViewItem61,
-            listViewItem62,
-            listViewItem63,
-            listViewItem64,
-            listViewItem65});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5,
+            listViewItem6,
+            listViewItem7,
+            listViewItem8,
+            listViewItem9,
+            listViewItem10,
+            listViewItem11,
+            listViewItem12,
+            listViewItem13});
             this.listLesson.Location = new System.Drawing.Point(30, 108);
             this.listLesson.Name = "listLesson";
             this.listLesson.Size = new System.Drawing.Size(581, 293);
@@ -117,12 +117,12 @@
             // 
             this.txtEntryCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtEntryCount.DetectUrls = false;
-            this.txtEntryCount.Location = new System.Drawing.Point(498, 81);
+            this.txtEntryCount.Location = new System.Drawing.Point(434, 81);
             this.txtEntryCount.Name = "txtEntryCount";
             this.txtEntryCount.ReadOnly = true;
             this.txtEntryCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.txtEntryCount.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.txtEntryCount.Size = new System.Drawing.Size(114, 29);
+            this.txtEntryCount.Size = new System.Drawing.Size(178, 29);
             this.txtEntryCount.TabIndex = 36;
             this.txtEntryCount.Text = "Entry: 12 of 12";
             // 
@@ -188,6 +188,7 @@
             this.Controls.Add(this.labelClass);
             this.Controls.Add(this.labelDate);
             this.Name = "AttendanceTeacher";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Attendance Management";
             this.Activated += new System.EventHandler(this.AttendanceTeacher_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AttendanceTeacher_FormClosing);

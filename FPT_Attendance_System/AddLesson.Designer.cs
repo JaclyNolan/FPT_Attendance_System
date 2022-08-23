@@ -144,6 +144,7 @@
             this.Controls.Add(this.labelUsername);
             this.Controls.Add(this.btnBack);
             this.Name = "AddLesson";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Lesson";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddLesson_FormClosing);
             this.Load += new System.EventHandler(this.AddLesson_Load);

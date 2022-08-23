@@ -43,12 +43,12 @@ namespace FPT_Attendance_System
         {
             con.Open();
             cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT COUNT(*) FROM StudentAttendance WHERE studentID = " + studentID;
+            cmd.CommandText = "SELECT COUNT(*) FROM StudentAttendance, Lesson WHERE Lesson.classID = " + classID + " AND Lesson.lessonID = StudentAttendance.lessonID AND studentID = " + studentID;
             dr = cmd.ExecuteReader();
             if (dr.Read())
             {
                 entryTotal = dr.GetInt32(0);
-                txtEntryCount.Text = "Total: " + entryTotal + " lessons";
+                txtEntryCount.Text = "Total: " + entryTotal + " attendances";
             }
             dr.Close();
             cmd = con.CreateCommand();
@@ -56,8 +56,8 @@ namespace FPT_Attendance_System
             dr = cmd.ExecuteReader();
             if (dr.Read())
             {
-                labelClass.Text = dr.GetString(0);
-                labelSubject.Text = dr.GetString(1);
+                labelClass.Text = "Class: " + dr.GetString(0);
+                labelSubject.Text = "Subject: " + dr.GetString(1);
             }
             dr.Close();
             cmd.CommandText = "SELECT Lesson.lessonDate, StudentAttendance.saPresent, StudentAttendance.saReasonOfAbsent FROM Lesson, StudentAttendance WHERE Lesson.classID = " + classID + " AND Lesson.lessonID = StudentAttendance.lessonID AND StudentAttendance.studentID = " + studentID;

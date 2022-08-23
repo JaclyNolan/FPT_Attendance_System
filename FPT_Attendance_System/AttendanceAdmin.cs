@@ -38,7 +38,10 @@ namespace FPT_Attendance_System
         {
             con.Open();
             cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT Lesson.lessonID, Lesson.lessonDate, Teacher.tName , Class.cName FROM Lesson, Class, Teacher WHERE Lesson.lessonID = " + lessonID + " AND Class.cID = Lesson.classID AND Teacher.tId = Lesson.teacherID";
+            cmd.CommandText = "SELECT Lesson.lessonID, Lesson.lessonDate, Teacher.tName" +
+                " , Class.cName FROM Lesson, Class, Teacher WHERE Lesson.lessonID" +
+                " = " + lessonID + " AND Class.cID = Lesson.classID AND" +
+                " Teacher.tId = Lesson.teacherID";
             dr = cmd.ExecuteReader();
             if (dr.Read())
             {
@@ -54,7 +57,8 @@ namespace FPT_Attendance_System
         {
             con.Open();
             cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT COUNT(*) FROM StudentAttendance WHERE lessonID = " + lessonID;
+            cmd.CommandText = "SELECT COUNT(*) FROM StudentAttendance WHERE" +
+                " lessonID = " + lessonID;
             dr = cmd.ExecuteReader();
             if (dr.Read())
             {
@@ -63,7 +67,10 @@ namespace FPT_Attendance_System
             }
             dr.Close();
             cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT Student.sName, StudentAttendance.saPresent, StudentAttendance.saReasonOfAbsent FROM Student, StudentAttendance WHERE StudentAttendance.lessonID = " + lessonID + " AND Student.sID = StudentAttendance.studentID";
+            cmd.CommandText = "SELECT Student.sName, StudentAttendance.saPresent," +
+                " StudentAttendance.saReasonOfAbsent FROM Student, StudentAttendance" +
+                " WHERE StudentAttendance.lessonID = " + lessonID + " AND" +
+                " Student.sID = StudentAttendance.studentID";
             dr = cmd.ExecuteReader();
             listLesson.Items.Clear();
             while (dr.Read())
@@ -99,7 +106,8 @@ namespace FPT_Attendance_System
                         string studentID = dr.GetInt32(0).ToString();
                         dr.Close();
                         cmd = con.CreateCommand();
-                        cmd.CommandText = "DELETE FROM StudentAttendance WHERE lessonID = " + lessonID + " AND studentID = " + studentID;
+                        cmd.CommandText = "DELETE FROM StudentAttendance WHERE lessonID = " + lessonID +
+                            " AND studentID = " + studentID;
                         cmd.ExecuteNonQuery();
                     }
                     

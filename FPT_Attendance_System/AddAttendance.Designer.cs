@@ -156,6 +156,7 @@
             this.Controls.Add(this.labelUsername);
             this.Controls.Add(this.btnBack);
             this.Name = "AddAttendance";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Attendance";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddAttendance_FormClosing);
             this.Load += new System.EventHandler(this.AddAttendance_Load);

@@ -62,24 +62,59 @@ namespace FPT_Attendance_System
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            con.Open();
-            try
+            if (dtpLessonDate.Value != null && comboClassID.Text != "" && comboTeacherID.Text != "")
             {
-                cmd = con.CreateCommand();
-                cmd.CommandText = "UPDATE Lesson SET lessonDate = @lessonDate, teacherID = @teacherID, classID = @classID WHERE lessonID = " + lessonID;
+                con.Open();
+                try
+                {
+                    cmd = con.CreateCommand();
+                    cmd.CommandText = "UPDATE Lesson SET lessonDate = @lessonDate, teacherID = @teacherID, classID = @classID WHERE lessonID = " + lessonID;
 
-                cmd.Parameters.Add("@lessonDate", SqlDbType.Date).Value = dtpLessonDate.Value;
-                cmd.Parameters.Add("@teacherID", SqlDbType.Int).Value = comboTeacherID.Text;
-                cmd.Parameters.Add("@classID", SqlDbType.Int).Value = comboClassID.Text;
+                    cmd.Parameters.Add("@lessonDate", SqlDbType.Date).Value = dtpLessonDate.Value;
+                    cmd.Parameters.Add("@teacherID", SqlDbType.Int).Value = comboTeacherID.Text;
+                    cmd.Parameters.Add("@classID", SqlDbType.Int).Value = comboClassID.Text;
 
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Lesson has been successfully edited!", "Added");
+                    cmd.ExecuteNonQuery();
+
+                    cmd = con.CreateCommand();
+                    cmd.CommandText = "DELETE FROM StudentAttendance WHERE lessonID = " + lessonID;
+                    cmd.ExecuteNonQuery();
+                    cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT COUNT(studentID) FROM StudentClass WHERE" +
+                        " classID = " + comboClassID.Text;
+                    dr = cmd.ExecuteReader();
+                    int nOfStudentID = 0;
+                    if (dr.Read()) nOfStudentID = dr.GetInt32(0);
+                    dr.Close();
+                    int[] studentID = new int[nOfStudentID];
+                    cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT studentID FROM StudentClass WHERE classID" +
+                        " = " + comboClassID.Text;
+                    dr = cmd.ExecuteReader();
+                    SqlCommand cmd2;
+                    for (int i = 0; i < nOfStudentID; i++)
+                    {
+                        dr.Read();
+                        studentID[i] = dr.GetInt32(0);
+                    }
+                    dr.Close();
+                    foreach (int id in studentID)
+                    {
+                        cmd2 = con.CreateCommand();
+                        cmd2.CommandText = "INSERT INTO StudentAttendance(studentID, " +
+                            "lessonID, saPresent, saReasonOfAbsent) VALUES (" + id + ","
+                            + lessonID + ",0,'')";
+                        cmd2.ExecuteNonQuery();
+                    }
+                    MessageBox.Show("Lesson has been successfully edited!", "Added");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Insert Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                con.Close();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Insert Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            con.Close();
+           else MessageBox.Show("Please input all of the required values!", "Insert Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnBack_Click(object sender, EventArgs e)
